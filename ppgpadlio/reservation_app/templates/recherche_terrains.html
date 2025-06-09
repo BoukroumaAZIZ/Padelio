@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Recherche Terrains - Padlio</title>
+    <style>
+      :root {
+        --beige: #fdf6f0;
+        --gold: #ffbd59;
+        --blue-dark: #22386c;
+        --blue-deep: #001b79;
+      }
+
+      * {
+        margin: 0; padding: 0; box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, var(--beige), #ffffff);
+        color: var(--blue-dark);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        color: var(--blue-deep);
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        animation: fadeInDown 0.8s ease forwards;
+      }
+
+      form {
+        background: white;
+        padding: 2rem 3rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 27, 121, 0.15);
+        width: 100%;
+        max-width: 480px;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease forwards;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--blue-deep);
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--blue-dark);
+        border-radius: 8px;
+        background-color: var(--beige);
+        font-size: 1rem;
+        color: var(--blue-dark);
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--blue-deep);
+      }
+
+      button {
+        background-color: var(--gold);
+        color: var(--blue-deep);
+        border: none;
+        padding: 14px 28px;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #ffd270;
+        transform: scale(1.03);
+      }
+
+      h2 {
+        color: var(--blue-deep);
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        animation: fadeInDown 1.2s ease forwards;
+      }
+
+      ul {
+        list-style-type: none;
+        max-width: 480px;
+        width: 100%;
+        padding: 0;
+        animation: fadeInUp 1.4s ease forwards;
+      }
+
+      li {
+        background-color: white;
+        margin-bottom: 1rem;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 27, 121, 0.1);
+        color: var(--blue-dark);
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      
+    </style>
+</head>
+<body>
+    <h1>Rechercher un terrain par gouvernorat</h1>
+
+
+    {% if terrains %}
+        <h2>Liste des terrains disponibles dans {{ request.GET.gouvernorat }} :</h2>
+        <ul>
+        {% for terrain in terrains %}
+            <li>{{ terrain.nom }}
+  <form action="{% url 'confirmer_reservation' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <input type="hidden" name="terrain_id" value="{{ terrain.id }}">
+    <input type="hidden" name="date_jeu_souhaitee" value="{{ request.GET.date_jeu_souhaitee }}">
+    <input type="hidden" name="heure_debut_souhaitee" value="{{ request.GET.heure_debut_souhaitee }}">
+    <input type="hidden" name="nb_personnes" value="{{ request.GET.nb_personnes }}">
+    <button type="submit" style="background:none; border:none; color: var(--blue-dark); cursor:pointer; font-weight:600; font-size:1.1rem; text-decoration:underline; padding:0;">
+      Réserver
+    </button>
+  </form></li>
+        {% empty %}
+            <li>Aucun terrain trouvé.</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

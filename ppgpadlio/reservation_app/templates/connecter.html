@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connexion</title>
+  <style>
+    :root {
+      --beige: #fdf6f0;
+      --gold: #ffbd59;
+      --blue-dark: #22386c;
+      --blue-deep: #001b79;
+      --font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: linear-gradient(135deg, var(--beige), #ffffff);
+      color: var(--blue-dark);
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 27, 121, 0.15);
+      width: 100%;
+      max-width: 400px;
+      animation: fadeInUp 1s ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--blue-dark);
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px;
+      border: 2px solid var(--blue-dark);
+      border-radius: 8px;
+      background-color: var(--beige);
+      font-size: 1rem;
+      color: var(--blue-dark);
+      transition: border 0.3s ease;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--blue-deep);
+    }
+
+    button {
+      margin-top: 2rem;
+      background-color: var(--gold);
+      color: var(--blue-deep);
+      border: none;
+      padding: 14px 28px;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #ffd270;
+      transform: scale(1.03);
+    }
+
+    .alert {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .alert-error {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+    .alert-success {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+    }
+
+    p.erreur {
+      color: #842029;
+      background-color: #f8d7da;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 1rem;
+      max-width: 400px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 450px) {
+      form {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags|default:'error' }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST" action="{% url 'connecter' %}">
+    {% csrf_token %}
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" required>
+
+    <label for="mot_de_passe">Mot de passe</label>
+    <input id="mot_de_passe" type="password" name="mot_de_passe" required>
+
+    <button type="submit">Se connecter</button>
+  </form>
+
+  {% if erreur %}
+    <p class="erreur">{{ erreur }}</p>
+  {% endif %}
+</body>
+</html>

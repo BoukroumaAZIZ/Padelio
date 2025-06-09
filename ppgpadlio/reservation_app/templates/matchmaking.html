@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Matchmaking - Padlio</title>
+  <style>
+    :root {
+      --beige: #fdf6f0;
+      --gold: #ffbd59;
+      --blue-dark: #22386c;
+      --blue-deep: #001b79;
+    }
+
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--beige), #ffffff);
+      color: var(--blue-dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: var(--blue-deep);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      animation: slideInDown 0.8s ease forwards;
+    }
+
+    p {
+      font-size: 1.25rem;
+      max-width: 480px;
+      line-height: 1.6;
+      color: var(--blue-dark);
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    /* Animations */
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Bienvenue dans le matchmaking !</h1>
+  <p>Un ou plusieurs terrains sont encore disponibles. Nous allons chercher d'autres joueurs compatibles avec votre créneau.</p>
+</body>
+</html>

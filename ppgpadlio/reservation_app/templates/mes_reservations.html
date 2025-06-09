@@ -1,0 +1,385 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réservation Padel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <style>
+    :root {
+      --beige: #fdf6f0;
+      --gold: #ffbd59;
+      --blue-dark: #22386c;
+      --blue-deep: #001b79;
+      --font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: linear-gradient(135deg, var(--beige), #ffffff);
+      color: var(--blue-dark);
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header */
+    .header-padel {
+      width: 100%;
+      background-color: var(--blue-deep);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 27, 121, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-padel {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-padel {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+
+    .nav-links-padel a {
+      color: var(--beige);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links-padel a:hover {
+      color: var(--gold);
+    }
+
+    /* Sections */
+    section {
+      max-width: 900px;
+      width: 100%;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-padel {
+      padding: 6rem 1rem 4rem 1rem;
+      background: linear-gradient(135deg, var(--gold), var(--blue-deep));
+      color: var(--beige);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 27, 121, 0.15);
+    }
+
+    .carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 27, 121, 0.15);
+}
+
+.slide {
+  display: none;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.slide.active {
+  display: block;
+}
+
+.carousel-buttons {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.carousel-buttons span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 0.5rem 1rem;
+  pointer-events: all;
+}
+
+.hero-text {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--blue-deep);
+}
+
+    h1 {
+      font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    h2 {
+      color: var(--blue-deep);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1.2px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: var(--blue-dark);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-padel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links-padel {
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-links-padel a {
+        margin: 0.5rem 0;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+.hero-full {
+  background-image: url("/static/images/padel1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.4); /* fond sombre derrière le texte */
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.footer-padel {
+  width: 100%;
+  background-color: var(--blue-deep);
+  color: var(--beige);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 -4px 10px rgba(0, 27, 121, 0.1);
+  margin: 0;
+}
+
+.footer-padel .social-links a {
+  color: var(--gold);
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-padel .social-links a:hover {
+  color: var(--beige);
+}
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  </style>
+</head>
+
+<body>
+
+  <header class="header-padel">
+    <nav class="nav-padel">
+      <div class="logo-padel">PADELIO</div>
+      <div class="nav-links-padel">
+        <a href="{% url 'home' %}">Accueil</a>
+        <a href="#reservation">Réservation</a>
+        <a href="#tournois">Tournois</a>
+        <a href="#contact">Contact</a>
+        <a href="{% url 'matchmaking_home' %}">Matchmaking</a>
+        <div class="dropdown">
+  <a href="#">Hello, <b>{{ utilisateur.prenom }}</b></a>
+  <div class="dropdown-content">
+    <a href="/profile">Profil</a>
+    <a href="{% url 'mes_reservations' %}">Mes réservations</a>
+    <a href="{% url 'logout' %}">Déconnexion</a>
+  </div>
+</div>
+      </div>
+    </nav>
+  </header>
+
+<!-- Hero plein écran SANS container -->
+<div class="hero-full text-white d-flex align-items-center justify-content-center" id="accueil">
+  <div class="text-center hero-overlay">
+    <h1 class="display-4 fw-bold">Mes réservations</h1>
+    <p class="lead">Bienvenue sur notre plateforme de réservation de terrains de padel. Simple, rapide et efficace !</p>
+  </div>
+</div>
+
+  
+
+
+
+<h2>Mes Réservations</h2>
+{% if reservations %}
+<table class="table table-striped table-hover table-bordered align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Terrain</th>
+      <th scope="col">Date de jeu souhaitée</th>
+      <th scope="col">Heure début</th>
+      <th scope="col">Nombre de personnes</th>
+      <th scope="col">État</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reservation in reservations %}
+    <tr>
+      <th scope="row">{{ reservation.id }}</th>
+      <td>{{ reservation.terrain.nom }}</td>
+      <td>{{ reservation.date_jeu_souhaitee|date:"d/m/Y" }}</td>
+      <td>{{ reservation.heure_debut_souhaitee|time:"H:i" }}</td>
+      <td>{{ reservation.nb_personnes }}</td>
+      <td>
+        {% if reservation.etat_reservation == 'E' %}
+          <span class="badge bg-warning text-dark">{{ reservation.get_etat_reservation_display }}</span>
+        {% elif reservation.etat_reservation == 'C' %}
+          <span class="badge bg-success">{{ reservation.get_etat_reservation_display }}</span>
+        {% else %}
+          {{ reservation.get_etat_reservation_display }}
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Vous n'avez aucune réservation pour le moment.</p>
+{% endif %}
+
+
+
+
+<br><br>
+
+  
+<footer class="footer-padel">
+  <div class="container">
+    <p style="color: #fdf6f0;">&copy; 2025 PADELIO. Tous droits réservés.</p>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

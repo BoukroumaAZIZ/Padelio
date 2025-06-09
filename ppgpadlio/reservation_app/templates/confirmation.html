@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirmation Réservation - Padlio</title>
+  <style>
+    :root {
+      --beige: #fdf6f0;
+      --gold: #ffbd59;
+      --blue-dark: #22386c;
+      --blue-deep: #001b79;
+    }
+
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--beige), #ffffff);
+      color: var(--blue-dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--blue-deep);
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    .confirmation-card {
+      background-color: white;
+      padding: 2rem 3rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 27, 121, 0.15);
+      max-width: 480px;
+      width: 100%;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .confirmation-card p {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--blue-dark);
+    }
+
+    .highlight {
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Réservation confirmée</h1>
+  <div class="confirmation-card">
+    <p>Réservation ID : <span class="highlight">{{ reservation.id }}</span></p>
+    <p>Terrain : <span class="highlight">{{ reservation.terrain }}</span></p>
+    <p>Date : <span class="highlight">{{ reservation.date_jeu_souhaitee }}</span></p>
+  </div>
+</body>
+</html>

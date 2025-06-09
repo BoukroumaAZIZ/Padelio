@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réservation Padlio</title>
+  <style>
+    /* Palette */
+    :root {
+      --beige: #fdf6f0;
+      --gold: #ffbd59;
+      --blue-dark: #22386c;
+      --blue-deep: #001b79;
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--beige), #ffffff);
+      color: var(--blue-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: var(--blue-deep);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 27, 121, 0.15);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    form p {
+      margin-bottom: 1.5rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--blue-dark);
+      border-radius: 8px;
+      background-color: var(--beige);
+      font-size: 1rem;
+      color: var(--blue-dark);
+      transition: border 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--blue-deep);
+    }
+
+    button {
+      background-color: var(--gold);
+      color: var(--blue-deep);
+      border: none;
+      padding: 14px 28px;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #ffd270;
+      transform: scale(1.03);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>
+    :root {
+      --beige: #fdf6f0;
+      --gold: #ffbd59;
+      --blue-dark: #22386c;
+      --blue-deep: #001b79;
+      --font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: linear-gradient(135deg, var(--beige), #ffffff);
+      color: var(--blue-dark);
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header */
+    .header-padel {
+      width: 100%;
+      background-color: var(--blue-deep);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 27, 121, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-padel {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-padel {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+
+    .nav-links-padel a {
+      color: var(--beige);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links-padel a:hover {
+      color: var(--gold);
+    }
+
+    /* Sections */
+    section {
+      max-width: 900px;
+      width: 100%;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-padel {
+      padding: 6rem 1rem 4rem 1rem;
+      background: linear-gradient(135deg, var(--gold), var(--blue-deep));
+      color: var(--beige);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 27, 121, 0.15);
+    }
+
+    .carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 27, 121, 0.15);
+}
+
+.slide {
+  display: none;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.slide.active {
+  display: block;
+}
+
+.carousel-buttons {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.carousel-buttons span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 0.5rem 1rem;
+  pointer-events: all;
+}
+
+.hero-text {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--blue-deep);
+}
+
+    h1 {
+      font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    h2 {
+      color: var(--blue-deep);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1.2px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: var(--blue-dark);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-padel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links-padel {
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-links-padel a {
+        margin: 0.5rem 0;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+.hero-full {
+  background-image: url("/static/images/padel1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.4); /* fond sombre derrière le texte */
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.footer-padel {
+  width: 100%;
+  background-color: var(--blue-deep);
+  color: var(--beige);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 -4px 10px rgba(0, 27, 121, 0.1);
+  margin: 0;
+}
+
+.footer-padel .social-links a {
+  color: var(--gold);
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-padel .social-links a:hover {
+  color: var(--beige);
+}
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  </style>
+</head>
+<body>
+  <header class="header-padel">
+    <nav class="nav-padel">
+      <div class="logo-padel">PADELIO</div>
+      <div class="nav-links-padel">
+        <a href="/">Accueil</a>
+        <a href="#reservation">Réservation</a>
+        <a href="#tournois">Tournois</a>
+        <a href="#contact">Contact</a>
+        <a href="{% url 'matchmaking_home' %}">Matchmaking</a>
+        <div class="dropdown">
+  <a href="#">Hello, <b>{{ utilisateur.prenom }}</b></a>
+  <div class="dropdown-content">
+    <a href="/profile">Profil</a>
+    <a href="{% url 'mes_reservations' %}">Mes réservations</a>
+    <a href="{% url 'logout' %}">Déconnexion</a>
+  </div>
+</div>
+      </div>
+    </nav>
+  </header>
+  <h1>Réservation</h1>
+
+  <form method="get" action="{% url 'rechercher_terrain' %}">
+  {% csrf_token %}
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      {{ form.gouvernorat.label_tag }}
+      {{ form.gouvernorat }}
+    </div>
+
+    <div class="form-group col-md-4">
+      {{ form.date_jeu_souhaitee.label_tag }}
+      {{ form.date_jeu_souhaitee }}
+    </div>
+
+    <div class="form-group col-md-4">
+      {{ form.heure_debut_souhaitee.label_tag }}
+      {{ form.heure_debut_souhaitee }}
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      {{ form.nb_personnes.label_tag }}
+      {{ form.nb_personnes }}
+    </div>
+
+    <div class="form-group col-md-6">
+      {{ form.mode_paiement.label_tag }}
+      {{ form.mode_paiement }}
+    </div>
+  </div>
+
+  <div id="montant" class="form-row" style="display: none; margin-top: 10px;">
+    <div class="form-group col-md-12">
+      <p><strong>Montant à payer :</strong> <span id="montant-valeur">0 DT</span></p>
+    </div>
+  </div>
+
+  <div id="carte-form" class="form-row" style="display: none; margin-top: 20px;">
+    <div class="form-group col-md-4">
+      <label for="numero_carte">Numéro de carte</label>
+      <input type="text" id="numero_carte" name="numero_carte" class="form-control" placeholder="1234 5678 9012 3456">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="date_expiration">Date d’expiration</label>
+      <input type="text" id="date_expiration" name="date_expiration" class="form-control" placeholder="MM/AA">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv" name="cvv" class="form-control" placeholder="123">
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary mt-3">Rechercher</button>
+</form>
+
+
+  
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const modePaiement = document.querySelector("select[name='mode_paiement']");
+    const carteForm = document.getElementById("carte-form");
+
+    function toggleCarteForm() {
+      const valeur = modePaiement.value;
+      if (["1part", "2part", "3part"].includes(valeur)) {
+        carteForm.style.display = "block";
+      } else {
+        carteForm.style.display = "none";
+      }
+    }
+
+    // Afficher/masquer au chargement initial
+    toggleCarteForm();
+
+    // Ajouter un écouteur de changement
+    modePaiement.addEventListener("change", toggleCarteForm);
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const modePaiement = document.querySelector("select[name='mode_paiement']");
+    const carteForm = document.getElementById("carte-form");
+    const montantDiv = document.getElementById("montant");
+    const montantValeur = document.getElementById("montant-valeur");
+
+    function togglePaiementFields() {
+      const valeur = modePaiement.value;
+      let montant = 0;
+
+      if (valeur === "1part") {
+        montant = 25;
+      } else if (valeur === "2part") {
+        montant = 50;
+      } else if (valeur === "3part") {
+        montant = 75;
+      }
+
+      if (montant > 0) {
+        carteForm.style.display = "block";
+        montantDiv.style.display = "block";
+        montantValeur.textContent = montant + " DT";
+      } else {
+        carteForm.style.display = "none";
+        montantDiv.style.display = "none";
+        montantValeur.textContent = "0 DT";
+      }
+    }
+
+    togglePaiementFields();
+    modePaiement.addEventListener("change", togglePaiementFields);
+  });
+</script>
+<br><br><br> <br><br><br><br><br> <br><br>
+<footer class="footer-padel">
+  <div class="container">
+    <p style="color: #fdf6f0;">&copy; 2025 PADELIO. Tous droits réservés.</p>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

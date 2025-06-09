@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Choix de paiement</title>
+</head>
+<body>
+
+<h2>Choisissez votre mode de paiement</h2>
+
+<form id="paiement-form">
+    {{ form.as_p }}
+
+    <div id="paiement-en-ligne" style="display:none; margin-top:20px;">
+        <p>Vous avez choisi de payer en ligne. (Ici tu peux afficher un bouton ou un formulaire fictif.)</p>
+        <button type="button" onclick="alertePaiement()">Payer en ligne (Simulation)</button>
+    </div>
+
+    <div id="paiement-cash" style="display:none; margin-top:20px;">
+        <p>Vous paierez cash le jour de la réservation.</p>
+        <button type="button" onclick="alerteCash()">Confirmer réservation</button>
+    </div>
+</form>
+
+<script>
+    const radios = document.querySelectorAll('input[name="mode_paiement"]');
+    const enLigneDiv = document.getElementById('paiement-en-ligne');
+    const cashDiv = document.getElementById('paiement-cash');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if(radio.value === 'en_ligne' && radio.checked) {
+                enLigneDiv.style.display = 'block';
+                cashDiv.style.display = 'none';
+            }
+            else if(radio.value === 'cash' && radio.checked) {
+                enLigneDiv.style.display = 'none';
+                cashDiv.style.display = 'block';
+            }
+        });
+    });
+
+    function alertePaiement() {
+        alert("Simulation paiement en ligne réussie. Réservation confirmée et mail envoyé.");
+    }
+
+    function alerteCash() {
+        alert("Réservation confirmée. Vous paierez cash le jour J. Mail envoyé.");
+    }
+</script>
+
+</body>
+</html>
